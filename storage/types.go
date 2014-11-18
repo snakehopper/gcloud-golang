@@ -96,6 +96,9 @@ type Object struct {
 	// Name is the name of the object.
 	Name string `json:"name,omitempty"`
 
+	// CacheControl control how long browser and Internet caches for the object.
+	CacheControl string
+
 	// ContentType is the MIME type of the object's content.
 	ContentType string `json:"contentType,omitempty"`
 
@@ -173,6 +176,7 @@ func (o *Object) toRawObject() *raw.Object {
 	return &raw.Object{
 		Bucket:          o.Bucket,
 		Name:            o.Name,
+		CacheControl:    o.CacheControl,
 		ContentType:     o.ContentType,
 		ContentEncoding: o.ContentEncoding,
 		ContentLanguage: o.ContentLanguage,
@@ -205,6 +209,7 @@ func newObject(o *raw.Object) *Object {
 	return &Object{
 		Bucket:          o.Bucket,
 		Name:            o.Name,
+		CacheControl:    o.CacheControl,
 		ContentType:     o.ContentType,
 		ContentLanguage: o.ContentLanguage,
 		ACL:             acl,
